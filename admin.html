@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin • BRIZIDOJJ</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <img src="logo.png" class="logo">
+  <h1>Painel Administrativo</h1>
+  <button class="admin-btn" onclick="voltar()">Voltar</button>
+</header>
+
+<main>
+  <div class="card">
+    <h3>Login ADM</h3>
+    <input type="email" id="email" placeholder="Email do administrador">
+    <input type="password" id="senha" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+  </div>
+
+  <div class="cardAdmin" id="adminPainel">
+    <h2>Inscrições</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>Peso</th>
+          <th>Sexo</th>
+          <th>Email</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabela"></tbody>
+    </table>
+  </div>
+  <div class="cardAdmin" id="editarPainel" style="display:none;">
+  <h2>Editar Inscrição</h2>
+
+  <input type="text" id="editNome">
+  <input type="number" id="editIdade">
+  <input type="number" id="editPeso">
+
+  <select id="editSexo">
+    <option value="Masculino">Masculino</option>
+    <option value="Feminino">Feminino</option>
+  </select>
+
+  <input type="email" id="editEmail">
+
+  <button onclick="salvarEdicao()">Salvar Alterações</button>
+</div>
+</main>
+
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getDatabase, ref, onValue, update } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBIrCTgysFeN0k0T91vRRXZGt0-ydiSdUw",
+    authDomain: "brizidojj-inscricoes.firebaseapp.com",
+    databaseURL: "https://brizidojj-inscricoes-default-rtdb.firebaseio.com",
+    projectId: "brizidojj-inscricoes",
+    storageBucket: "brizidojj-inscricoes.firebasestorage.app",
+    messagingSenderId: "423887017147",
+    appId: "1:423887017147:web:d248caca1b25e76383059e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+ 
+
+  window.db = db;
+  window.ref = ref;
+  window.onValue = onValue;
+  window.update = update;
+  
+  const auth = getAuth(app);
+
+window.auth = auth;
+window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+
+</script>
+
+
+<script src="admin.js"></script>
+</body>
+</html>

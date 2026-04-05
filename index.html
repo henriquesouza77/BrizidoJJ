@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRIZIDOJJ • Coleta de Dados</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="BRIZIDOJJ" class="logo">
+  <h1>BRIZIDOJJ</h1>
+  <p>Campeonato Infantil de Jiu-Jitsu</p>
+  <!-- BOTÃO ADMIN -->
+  <button class="admin-btn" onclick="irParaAdmin()">
+    Área do Administrador
+  </button>
+
+</header>
+
+<main>
+  <div class="card">
+    <h2>Inscrição</h2>
+    <input type="text" id="nome" placeholder="Nome completo">
+    <input type="number" id="idade" placeholder="Idade">
+    <input type="number" id="peso" placeholder="Peso (kg)">
+    <select id="sexo">
+        <option value="">Selecione o sexo</option>
+        <option value="Masculino">Masculino</option>
+       <option value="Feminino">Feminino</option>
+    </select>
+    <input type="email" id="email" placeholder="Email do responsável">
+<button onclick="abrirConfirmacao()">Finalizar Inscrição</button>  </div>
+
+  
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBIrCTgysFeN0k0T91vRRXZGt0-ydiSdUw",
+    authDomain: "brizidojj-inscricoes.firebaseapp.com",
+    databaseURL: "https://brizidojj-inscricoes-default-rtdb.firebaseio.com",
+    projectId: "brizidojj-inscricoes",
+    storageBucket: "brizidojj-inscricoes.firebasestorage.app",
+    messagingSenderId: "423887017147",
+    appId: "1:423887017147:web:d248caca1b25e76383059e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // deixa global
+  window.db = db;
+  window.ref = ref;
+  window.push = push;
+</script>
+
+<script src="script.js"></script>
+
+<div id="modalConfirmacao" style="display:none;" class="modal">
+  <div class="modal-content">
+    <h2>Confirmar Inscrição</h2>
+
+    <p>tem certeza que deseja enviar essas informações, caso estas estejam erradas tera que pedir para o administrador corrigir                • ATENÇÃO</p>
+<br> 
+    <p><strong>Nome:</strong> <span id="confNome"></span></p>
+    <p><strong>Idade:</strong> <span id="confIdade"></span></p>
+    <p><strong>Peso:</strong> <span id="confPeso"></span></p>
+    <p><strong>Sexo:</strong> <span id="confSexo"></span></p>
+    <p><strong>Email:</strong> <span id="confEmail"></span></p>
+
+    <div class="botoes">
+      <button onclick="fecharModal()">Corrigir</button>
+      <button onclick="confirmarEnvio()">Finalizar Inscrição</button>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
