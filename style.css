@@ -196,3 +196,11 @@ td button:hover {
   gap: 10px;
   margin-top: 15px;
 }
+.email {
+  word-break: break-word;
+  max-width: 150px;
+}
+table {
+  display: block;
+  overflow-x: auto;
+}
